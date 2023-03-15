@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Onboarding from "./src/Authentication/Onboarding";
 import LoadAssets from "./src/components/LoadAssets";
+import { View } from "react-native";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Display-Bold.otf"),
@@ -31,5 +32,9 @@ export default function App() {
     <LoadAssets {...{ fonts }}>
       <AuthenticationNavigator />
     </LoadAssets>
+    // <View style={{ flex: 1, backgroundColor: "red" }}></View>
+    // <NavigationContainer>
+    //   <AuthenticationNavigator />
+    // </NavigationContainer>
   );
 }
