@@ -3,13 +3,14 @@ import { View, StyleSheet, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import SubSlide from "./SubSlide";
-import useEffect from "react";
+import Dot from "./Dot";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedScrollHandler,
   interpolateColor,
   multiply,
+  divide,
 } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
@@ -22,6 +23,7 @@ const slides = [
     subTitle: "Find Your Outfits",
     description:
       "Confused about your outfit? Don't worry! Find the best outfit here!",
+    imageSrc: require("./fashion1.png"),
   },
   {
     title: "Playful",
@@ -29,6 +31,7 @@ const slides = [
     subTitle: "Hear it First, Wear it First",
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfits ideas",
+    imageSrc: require("./fashion2.png"),
   },
   {
     title: "Eccentric",
@@ -36,6 +39,7 @@ const slides = [
     subTitle: "Your Style, Your Way",
     description:
       "Create your individual & unique style and look amazing everyday",
+    imageSrc: require("./fashion3.png"),
   },
   {
     title: "Funny",
@@ -43,6 +47,7 @@ const slides = [
     subTitle: "Look Good, Feel Good",
     description:
       "Discover the latest trends in fashion and explore your personality",
+    imageSrc: require("./fashion4.png"),
   },
 ];
 
@@ -86,11 +91,24 @@ const Onboarding = () => {
           onScroll={scrollHandler}
         >
           {slides.map((slide, index) => {
-            return <Slide title={slide.title} key={index.toString()} />;
+            return (
+              <Slide
+                title={slide.title}
+                key={index.toString()}
+                imageSrc={slide.imageSrc}
+              />
+            );
           })}
         </Animated.ScrollView>
       </Animated.View>
       <View style={styles.footer}>
+        <View style={styles.pagination}>
+          {slides.map((_, index) => {
+            return (
+              <Dot key={index.toString()} x={x} index={index} width={width} />
+            );
+          })}
+        </View>
         <Animated.View
           style={[
             {
@@ -99,35 +117,48 @@ const Onboarding = () => {
             animatedBGStyle,
           ]}
         />
-        <Animated.View
-          style={[
-            styles.footerContent,
-            {
-              width: width * slides.length,
-              flex: 1,
-            },
-            animatedSubSlidetyle,
-          ]}
+
+        <View
+          style={{
+            flex: 1,
+            //borderColor: "pink",
+            //borderWidth: 4,
+            borderTopLeftRadius: BORDER_RADIUS,
+            overflow: "hidden",
+          }}
         >
-          {slides.map(({ subTitle, description }, index) => {
-            return (
-              <SubSlide
-                key={index.toString()}
-                last={index === slides.length - 1}
-                subTitle={subTitle}
-                description={description}
-                onPress={() => {
-                  if (scrollRef.current) {
-                    scrollRef.current.scrollTo({
-                      x: width * (index + 1),
-                      animated: true,
-                    });
-                  }
-                }}
-              />
-            );
-          })}
-        </Animated.View>
+          <Animated.View
+            style={[
+              styles.footerContent,
+              {
+                width: width * slides.length,
+                flex: 1,
+                //borderColor: "red",
+                //borderWidth: 20,
+              },
+              animatedSubSlidetyle,
+            ]}
+          >
+            {slides.map(({ subTitle, description }, index) => {
+              return (
+                <SubSlide
+                  key={index.toString()}
+                  last={index === slides.length - 1}
+                  subTitle={subTitle}
+                  description={description}
+                  onPress={() => {
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollTo({
+                        x: width * (index + 1),
+                        animated: true,
+                      });
+                    }
+                  }}
+                />
+              );
+            })}
+          </Animated.View>
+        </View>
       </View>
     </View>
   );
@@ -146,10 +177,22 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
   },
+  pagination: {
+    ...StyleSheet.absoluteFillObject,
+    height: BORDER_RADIUS * 0.75,
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "black",
+    zIndex: 100,
+    flexDirection: "row",
+    gap: 8,
+  },
   footerContent: {
     backgroundColor: "white",
     borderTopLeftRadius: BORDER_RADIUS,
     flexDirection: "row",
+    // borderColor: "red",
+    // borderWidth: 10,
   },
 });
 
