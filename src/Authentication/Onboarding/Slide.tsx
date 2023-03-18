@@ -1,6 +1,6 @@
 import * as React from "react";
-import { View, Text, Dimensions, StyleSheet, Image } from "react-native";
-
+import { View, Dimensions, StyleSheet, Image } from "react-native";
+import { RestyleText } from "../../components";
 const { width, height } = Dimensions.get("window");
 
 interface SlideProps {
@@ -25,7 +25,7 @@ const Slide = ({ title, right = false, imageSrc }: SlideProps) => {
         <Image source={imageSrc} style={styles.picture} />
       </View>
       <View style={[styles.titleContainer, { transform: transform }]}>
-        <Text style={styles.title}>{title}</Text>
+        <RestyleText variant="hero">{title}</RestyleText>
       </View>
     </View>
   );
@@ -54,13 +54,7 @@ const styles = StyleSheet.create({
       },
     ],
   },
-  title: {
-    fontSize: 80,
-    lineHeight: 80,
-    fontFamily: "SFProText-Bold",
-    color: "white",
-    textAlign: "center",
-  },
+  title: {},
 });
 
 export default Slide;

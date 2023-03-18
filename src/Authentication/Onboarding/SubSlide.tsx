@@ -2,6 +2,7 @@ import * as React from "react";
 import Animated from "react-native-reanimated";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../../components/Button";
+import { RestyleText } from "../../components";
 
 interface SubSlide {
   last?: boolean;
@@ -13,8 +14,12 @@ interface SubSlide {
 const SubSlide = ({ last, subTitle, description, onPress }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.subtitle}>{subTitle}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <RestyleText variant="title1" style={styles.subtitle}>
+        {subTitle}
+      </RestyleText>
+      <RestyleText variant="body" style={styles.description}>
+        {description}
+      </RestyleText>
       <Button
         onPress={onPress}
         label={last ? "Get started" : "Next"}
@@ -39,11 +44,6 @@ const styles = StyleSheet.create({
     marginVertical: 24,
   },
   description: {
-    fontFamily: "SFProText-Regular",
-    fontSize: 16,
-    lineHeight: 24,
-    color: "#0C0D34",
-    textAlign: "center",
     marginBottom: 40,
   },
 });

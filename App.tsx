@@ -1,11 +1,11 @@
 import "react-native-gesture-handler";
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Onboarding, Welcome } from "./src/Authentication";
-
 import LoadAssets from "./src/components/LoadAssets";
+import theme from "./src/components/Theme";
 import { View } from "react-native";
+import { ThemeProvider } from "@shopify/restyle";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Display-Bold.otf"),
@@ -31,9 +31,12 @@ const AuthenticationNavigator = () => {
 
 export default function App() {
   return (
-    <LoadAssets {...{ fonts }}>
-      <AuthenticationNavigator />
-    </LoadAssets>
+    <ThemeProvider theme={theme}>
+      <LoadAssets {...{ fonts }}>
+        <AuthenticationNavigator />
+      </LoadAssets>
+    </ThemeProvider>
+
     // <View style={{ flex: 1, backgroundColor: "red" }}></View>
     // <NavigationContainer>
     //   <AuthenticationNavigator />
