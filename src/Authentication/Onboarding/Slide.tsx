@@ -1,7 +1,9 @@
 import * as React from "react";
 import { View, Dimensions, StyleSheet, Image } from "react-native";
+
 import { RestyleText } from "../../components";
 const { width, height } = Dimensions.get("window");
+import Animated from "react-native-reanimated";
 
 interface SlideProps {
   title: string;
@@ -21,11 +23,10 @@ const Slide = ({ title, right = false, imageSrc }: SlideProps) => {
   ];
   return (
     <View style={styles.container}>
-      <View style={styles.underlay}>
-        <Image source={imageSrc} style={styles.picture} />
-      </View>
       <View style={[styles.titleContainer, { transform: transform }]}>
-        <RestyleText variant="hero">{title}</RestyleText>
+        <RestyleText variant="hero" style={styles.title}>
+          {title}
+        </RestyleText>
       </View>
     </View>
   );
@@ -35,16 +36,7 @@ const styles = StyleSheet.create({
   container: {
     width: width,
   },
-  underlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "flex-end",
 
-    borderBottomRightRadius: 75,
-    overflow: "hidden",
-  },
-  picture: {
-    flex: 1,
-  },
   titleContainer: {
     height: 100,
     justifyContent: "center",
@@ -54,7 +46,9 @@ const styles = StyleSheet.create({
       },
     ],
   },
-  title: {},
+  title: {
+    zIndex: 100,
+  },
 });
 
 export default Slide;

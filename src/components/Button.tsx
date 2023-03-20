@@ -5,7 +5,7 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "./Theme";
 
 interface ButtonProps {
-  variant: "default" | "primary";
+  variant: "default" | "primary" | "transparent";
   label: string;
   onPress: () => void;
 }
@@ -15,6 +15,8 @@ const Button = ({ variant = "default", label, onPress }: ButtonProps) => {
   const backgroundColor =
     variant === "primary"
       ? theme.colors.secondary
+      : variant === "transparent"
+      ? theme.colors.plain
       : theme.colors.primaryFullyFaded;
   const color =
     variant === "primary" ? theme.colors.white : theme.colors.primary;

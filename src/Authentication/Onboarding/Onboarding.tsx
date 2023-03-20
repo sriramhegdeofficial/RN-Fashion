@@ -1,9 +1,11 @@
 import * as React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import SubSlide from "./SubSlide";
 import Dot from "./Dot";
+import { useTheme } from "@shopify/restyle";
+import { Routes, StackNavigationProps } from "../../components/Navigation";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,10 +13,11 @@ import Animated, {
   interpolateColor,
   multiply,
   divide,
+  Extrapolate,
+  interpolate,
 } from "react-native-reanimated";
 
-const { width } = Dimensions.get("window");
-const BORDER_RADIUS = 75;
+const { width, height } = Dimensions.get("window");
 
 const slides = [
   {
@@ -51,12 +54,62 @@ const slides = [
   },
 ];
 
-const Onboarding = () => {
+export const assets = slides.map((slide) => slide.imageSrc);
+
+const Onboarding = ({
+  navigation,
+}: StackNavigationProps<Routes, "OnBoarding">) => {
   const scrollRef = React.useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }) => {
       x.value = contentOffset.x;
+    },
+  });
+  const theme = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "white",
+    },
+    slider: {
+      height: SLIDE_HEIGHT,
+      borderBottomRightRadius: theme.borderRadii.xl,
+      backgroundColor: "cyan",
+    },
+    footer: {
+      flex: 1,
+    },
+    pagination: {
+      ...StyleSheet.absoluteFillObject,
+      height: theme.borderRadii.xl * 0.75,
+      justifyContent: "center",
+      alignItems: "center",
+      // backgroundColor: "black",
+      zIndex: 100,
+      flexDirection: "row",
+      gap: 8,
+    },
+    footerContent: {
+      backgroundColor: "white",
+      borderTopLeftRadius: theme.borderRadii.xl,
+      flexDirection: "row",
+      // borderColor: "red",
+      // borderWidth: 10,
+    },
+    underlay: {
+      ...StyleSheet.absoluteFillObject,
+      justifyContent: "flex-end",
+      alignItems: "center",
+      width: width,
+      height: height * 0.61,
+      borderBottomRightRadius: theme.borderRadii.xl,
+      overflow: "hidden",
+    },
+    picture: {
+      width: width * 0.75,
+      height: height * 0.56,
     },
   });
 
@@ -79,6 +132,26 @@ const Onboarding = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, animatedBGStyle]}>
+        {slides.map((slide, index) => {
+          const animatedImageOpacityStyle = useAnimatedStyle(() => {
+            return {
+              opacity: interpolate(
+                x.value,
+                [(index - 0.5) * width, index * width, (index + 0.5) * width],
+                [0, 1, 0],
+                Extrapolate.CLAMP
+              ),
+            };
+          });
+          return (
+            <Animated.View
+              style={[styles.underlay, animatedImageOpacityStyle]}
+              key={index.toString()}
+            >
+              <Image source={slide.imageSrc} style={styles.picture} />
+            </Animated.View>
+          );
+        })}
         <Animated.ScrollView
           ref={scrollRef}
           horizontal
@@ -103,9 +176,15 @@ const Onboarding = () => {
       </Animated.View>
       <View style={styles.footer}>
         <View style={styles.pagination}>
-          {slides.map((_, index) => {
+          {slides.map((slide, index) => {
             return (
-              <Dot key={index.toString()} x={x} index={index} width={width} />
+              <Dot
+                color={slide.color}
+                key={index.toString()}
+                x={x}
+                index={index}
+                width={width}
+              />
             );
           })}
         </View>
@@ -123,7 +202,7 @@ const Onboarding = () => {
             flex: 1,
             //borderColor: "pink",
             //borderWidth: 4,
-            borderTopLeftRadius: BORDER_RADIUS,
+            borderTopLeftRadius: theme.borderRadii.xl,
             overflow: "hidden",
           }}
         >
@@ -140,15 +219,18 @@ const Onboarding = () => {
             ]}
           >
             {slides.map(({ subTitle, description }, index) => {
+              const last = index === slides.length - 1;
               return (
                 <SubSlide
                   key={index.toString()}
-                  last={index === slides.length - 1}
+                  last={last}
                   subTitle={subTitle}
                   description={description}
                   onPress={() => {
-                    if (scrollRef.current) {
-                      scrollRef.current.scrollTo({
+                    if (last) {
+                      navigation.navigate("Welcome");
+                    } else {
+                      scrollRef.current?.scrollTo({
                         x: width * (index + 1),
                         animated: true,
                       });
@@ -163,37 +245,5 @@ const Onboarding = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-  slider: {
-    height: SLIDE_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS,
-    backgroundColor: "cyan",
-  },
-  footer: {
-    flex: 1,
-  },
-  pagination: {
-    ...StyleSheet.absoluteFillObject,
-    height: BORDER_RADIUS * 0.75,
-    justifyContent: "center",
-    alignItems: "center",
-    // backgroundColor: "black",
-    zIndex: 100,
-    flexDirection: "row",
-    gap: 8,
-  },
-  footerContent: {
-    backgroundColor: "white",
-    borderTopLeftRadius: BORDER_RADIUS,
-    flexDirection: "row",
-    // borderColor: "red",
-    // borderWidth: 10,
-  },
-});
 
 export default Onboarding;

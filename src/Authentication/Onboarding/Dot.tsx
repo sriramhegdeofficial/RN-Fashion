@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTheme } from "@shopify/restyle";
 import Animated, {
   divide,
   Extrapolate,
@@ -12,9 +13,11 @@ interface DotProps {
   index: number;
   x: SharedValue<number>;
   width: number;
+  color: string;
 }
 
-const Dot = ({ index, x, width }) => {
+const Dot = ({ index, x, width, color }) => {
+  const theme = useTheme();
   const animatedDotStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(
@@ -39,7 +42,7 @@ const Dot = ({ index, x, width }) => {
     <Animated.View
       style={[
         {
-          backgroundColor: "#2CB9B0",
+          backgroundColor: color,
           width: 8,
           height: 8,
           borderRadius: 4,
