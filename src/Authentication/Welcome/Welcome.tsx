@@ -4,6 +4,7 @@ import Slide, { SLIDE_HEIGHT } from "./../Onboarding/Slide";
 import { useTheme } from "@shopify/restyle";
 import { RestyleText } from "../../components/Theme";
 import { Button } from "../../components";
+import { Routes, StackNavigationProps } from "../../components/Navigation";
 
 interface WelcomeProps {}
 
@@ -15,7 +16,7 @@ export const assets = ImageSrc.src;
 
 const { width, height } = Dimensions.get("window");
 
-const Welcome = ({}: WelcomeProps) => {
+const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
     container: {
@@ -93,8 +94,8 @@ const Welcome = ({}: WelcomeProps) => {
           <Button
             variant="primary"
             label="Have an account? Login"
-            onPress={function (): void {
-              throw new Error("Function not implemented.");
+            onPress={() => {
+              navigation.navigate("Login");
             }}
           />
           <Button

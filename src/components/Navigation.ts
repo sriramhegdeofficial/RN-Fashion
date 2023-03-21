@@ -13,4 +13,5 @@ RouteName extends keyof ParamList = string
 export type Routes = {
     OnBoarding: undefined;
     Welcome: undefined;
+    Login: undefined;
 }

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { View, StyleSheet, Dimensions, Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import SubSlide from "./SubSlide";
 import Dot from "./Dot";

@@ -6,11 +6,17 @@ import { Theme } from "./Theme";
 
 interface ButtonProps {
   variant: "default" | "primary" | "transparent";
-  label: string;
+  label?: string;
   onPress: () => void;
+  children?: React.ReactNode;
 }
 
-const Button = ({ variant = "default", label, onPress }: ButtonProps) => {
+const Button = ({
+  variant = "default",
+  label = "",
+  onPress,
+  children,
+}: ButtonProps) => {
   const theme = useTheme<Theme>();
   const backgroundColor =
     variant === "primary"
@@ -25,7 +31,11 @@ const Button = ({ variant = "default", label, onPress }: ButtonProps) => {
       style={[styles.container, { backgroundColor }]}
       onPress={onPress}
     >
-      <Text style={[styles.label, { color }]}>{label}</Text>
+      {children ? (
+        children
+      ) : (
+        <Text style={[styles.label, { color }]}>{label}</Text>
+      )}
     </RectButton>
   );
 };
@@ -40,7 +50,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 15,
-    fontFamily: "SFProText-Medium",
+    fontFamily: "SFProText-Semibold",
   },
 });
 
