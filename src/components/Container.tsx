@@ -1,5 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Image, Dimensions, StatusBar } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  StatusBar,
+  KeyboardAvoidingView,
+} from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -10,6 +17,7 @@ const height = width * aspectRatio;
 interface ContainerProps {
   children: React.ReactNode;
   footer: React.ReactNode;
+  style?: object;
 }
 
 export const assets = [
@@ -18,7 +26,7 @@ export const assets = [
   require("./assets/3.png"),
 ];
 
-const Container = ({ children, footer }: ContainerProps) => {
+const Container = ({ children, footer, style = {} }: ContainerProps) => {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -60,7 +68,7 @@ const Container = ({ children, footer }: ContainerProps) => {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.imageContainer}>
         <Image source={assets[0]} style={styles.image} />

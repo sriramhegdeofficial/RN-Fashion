@@ -1,18 +1,31 @@
 import React from "react";
-import { View } from "react-native";
+import { View, KeyboardAvoidingView, Dimensions } from "react-native";
 import { Routes, StackNavigationProps } from "../../components/Navigation";
 import theme from "../../components/Theme";
+
 import {
   Button,
   Container,
   SocialLogin,
   RestyleText,
+  TextInput,
+  Checkbox,
 } from "./../../components";
+
+const emailValidator = (email: string) => {
+  const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email);
+};
+const passwordValidator = (passowrd: string) => {
+  if (passowrd.length < 6 || passowrd.length > 256) return false;
+  return true;
+};
+const wSize = Dimensions.get("window");
 
 const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
   const footer = (
     <>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", backgroundColor: "red" }}>
         <SocialLogin />
         <Button
           variant="transparent"
@@ -31,8 +44,61 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
     </>
   );
   return (
-    <Container footer={footer}>
-      <View />
+    <Container footer={footer} style={{ minHeight: wSize.height }}>
+      <View
+        style={{
+          paddingHorizontal: theme.borderRadii.m * 3,
+          paddingVertical: theme.borderRadii.m,
+        }}
+      >
+        <RestyleText
+          variant="title1"
+          style={{ textAlign: "center", marginBottom: theme.borderRadii.m }}
+        >
+          Welcome back
+        </RestyleText>
+        <RestyleText
+          variant="body"
+          style={{ textAlign: "center", marginBottom: theme.borderRadii.m * 2 }}
+        >
+          Use your credentials below and login to your account
+        </RestyleText>
+
+        <View style={{ marginBottom: theme.borderRadii.m }}>
+          <TextInput
+            icon="mail"
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            validator={emailValidator}
+          />
+        </View>
+        <View style={{}}>
+          <TextInput
+            icon="lock"
+            placeholder="Enter your password"
+            secureTextEntry={true}
+            validator={passwordValidator}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: theme.borderRadii.m,
+          }}
+        >
+          <Checkbox label="Remember me" />
+          <Button
+            variant="transparent"
+            onPress={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          >
+            <RestyleText color="secondary">Forgot password?</RestyleText>
+          </Button>
+        </View>
+      </View>
     </Container>
   );
 };

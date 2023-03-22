@@ -16,6 +16,8 @@ const palette = {
   secondary: "#2CB9B0",
   lightGrey: "#F4F0EF",
   plain: "transparent",
+  darkGrey: "#8A8D90",
+  danger: "#DC3545",
 };
 
 const theme = createTheme({
@@ -27,6 +29,8 @@ const theme = createTheme({
     secondary: palette.secondary,
     lightGrey: palette.lightGrey,
     plain: palette.plain,
+    darkGrey: palette.darkGrey,
+    danger: palette.danger,
   },
   spacing: {
     s: 8,
@@ -74,14 +78,14 @@ const theme = createTheme({
       textAlign: "center",
     },
     button: {
-      fontFamily: "SFProDisplay-Medium",
+      fontFamily: "SFProText-Medium",
       fontSize: 15,
       color: "secondary",
     },
     header: {
       fontSize: 12,
       lineHeight: 24,
-      fontFamily: "SFProDisplay-Semibold",
+      fontFamily: "SFProText-Semibold",
       color: "secondary",
     },
   },

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RectButton } from "react-native-gesture-handler";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "./Theme";
 
@@ -27,16 +27,17 @@ const Button = ({
   const color =
     variant === "primary" ? theme.colors.white : theme.colors.primary;
   return (
-    <RectButton
+    <TouchableOpacity
       style={[styles.container, { backgroundColor }]}
       onPress={onPress}
+      activeOpacity={1}
     >
       {children ? (
         children
       ) : (
         <Text style={[styles.label, { color }]}>{label}</Text>
       )}
-    </RectButton>
+    </TouchableOpacity>
   );
 };
 
