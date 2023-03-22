@@ -25,7 +25,7 @@ const wSize = Dimensions.get("window");
 const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
   const footer = (
     <>
-      <View style={{ alignItems: "center", backgroundColor: "red" }}>
+      <View style={{ alignItems: "center" }}>
         <SocialLogin />
         <Button
           variant="transparent"
@@ -64,7 +64,11 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
           Use your credentials below and login to your account
         </RestyleText>
 
-        <View style={{ marginBottom: theme.borderRadii.m }}>
+        <View
+          style={{
+            marginBottom: theme.borderRadii.m,
+          }}
+        >
           <TextInput
             icon="mail"
             placeholder="Enter your email"
@@ -72,7 +76,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
             validator={emailValidator}
           />
         </View>
-        <View style={{}}>
+        <View>
           <TextInput
             icon="lock"
             placeholder="Enter your password"
@@ -96,6 +100,16 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
             }}
           >
             <RestyleText color="secondary">Forgot password?</RestyleText>
+          </Button>
+        </View>
+        <View style={{ alignItems: "center", marginTop: theme.borderRadii.m }}>
+          <Button
+            variant="primary"
+            onPress={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          >
+            <RestyleText>Login to your account</RestyleText>
           </Button>
         </View>
       </View>
