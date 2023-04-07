@@ -1,8 +1,8 @@
 import * as React from "react";
 import { RectButton } from "react-native-gesture-handler";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useTheme } from "@shopify/restyle";
-import { Theme } from "./Theme";
+
+import { useTheme } from "./Theme";
 
 interface ButtonProps {
   variant: "default" | "primary" | "transparent";
@@ -17,7 +17,7 @@ const Button = ({
   onPress,
   children,
 }: ButtonProps) => {
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const backgroundColor =
     variant === "primary"
       ? theme.colors.secondary

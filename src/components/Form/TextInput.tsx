@@ -6,7 +6,7 @@ import {
   TextInputProps as RNTextInputProps,
 } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
-import theme from "../Theme";
+import { useTheme } from "../Theme";
 
 
 interface TextInputProps extends RNTextInputProps {
@@ -19,7 +19,7 @@ interface TextInputProps extends RNTextInputProps {
 
 
 
-const SIZE = theme.borderRadii.m * 2;
+
 
 const TextInput = ({
   icon,
@@ -30,9 +30,11 @@ const TextInput = ({
   ...otherProps
 }: TextInputProps) => {
 
+  const theme = useTheme();
+
   const [input, setInput] = React.useState<string>("");
   const { onChangeText } = otherProps;
-
+  const SIZE = theme.borderRadii.m * 2;
  
 
  

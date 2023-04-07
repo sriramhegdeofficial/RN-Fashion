@@ -7,7 +7,7 @@ import {
   StatusBar,
   KeyboardAvoidingView,
 } from "react-native";
-import { useTheme } from "@shopify/restyle";
+import { useTheme } from "./Theme";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");

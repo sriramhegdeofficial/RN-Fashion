@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { View, StyleSheet } from "react-native";
-import { useTheme } from "@shopify/restyle";
+import { useTheme } from "./Theme";
 
 const SocialLogin = () => {
   const theme = useTheme();

@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { RestyleText } from "../Theme";
 import { Feather as Icon } from "@expo/vector-icons";
-import theme from "../Theme";
+import { useTheme } from "./../Theme";
 
 interface CheckboxProps {
   label: string;
@@ -11,8 +11,8 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ label, onChange, checked }: CheckboxProps) => {
-  // const [checked, setChecked] = React.useState<boolean>(false);
-
+  // const  [checked, setChecked] = React.useState<boolean>(false);
+ const theme = useTheme();
   const styles = StyleSheet.create({
     container: {
       flexDirection: "row",

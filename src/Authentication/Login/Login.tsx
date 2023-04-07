@@ -1,7 +1,6 @@
 import React from "react";
 import { View, KeyboardAvoidingView, Dimensions } from "react-native";
 import { Routes, StackNavigationProps } from "../../components/Navigation";
-import theme from "../../components/Theme";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 
@@ -12,7 +11,9 @@ import {
   RestyleText,
   TextInput,
   Checkbox,
+  useTheme,
 } from "./../../components";
+
 
 // const emailValidator = (email: string) => {
 //   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -31,6 +32,7 @@ const LoginSchema = Yup.object().shape({
 const wSize = Dimensions.get("window");
 
 const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
+  const theme = useTheme();
   const footer = (
     <>
       <View style={{ alignItems: "center" }}>

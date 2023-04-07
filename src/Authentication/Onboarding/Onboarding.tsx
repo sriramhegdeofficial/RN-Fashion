@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions, Image } from "react-native";
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import SubSlide from "./SubSlide";
 import Dot from "./Dot";
-import { useTheme } from "@shopify/restyle";
+import { useTheme } from "./../../components";
 import { Routes, StackNavigationProps } from "../../components/Navigation";
 import Animated, {
   useSharedValue,
