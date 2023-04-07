@@ -1,7 +1,11 @@
 import * as React from "react";
 import { View, StyleSheet, Image, Dimensions } from "react-native";
 import Slide, { SLIDE_HEIGHT } from "./../Onboarding/Slide";
+<<<<<<< HEAD
+import { useTheme } from "./../../components";
+=======
 import { useTheme } from "@shopify/restyle";
+>>>>>>> origin/main
 import { RestyleText } from "../../components/Theme";
 import { Button } from "../../components";
 import { Routes, StackNavigationProps } from "../../components/Navigation";

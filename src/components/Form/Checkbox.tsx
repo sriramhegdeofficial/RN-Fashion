@@ -2,7 +2,8 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { RestyleText } from "../Theme";
 import { Feather as Icon } from "@expo/vector-icons";
-import theme from "../Theme";
+<<<<<<< HEAD
+import { useTheme } from "./../Theme";
 
 interface CheckboxProps {
   label: string;
@@ -11,8 +12,19 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ label, onChange, checked }: CheckboxProps) => {
-  // const [checked, setChecked] = React.useState<boolean>(false);
+  // const  [checked, setChecked] = React.useState<boolean>(false);
+ const theme = useTheme();
+=======
+import theme from "../Theme";
 
+interface CheckboxProps {
+  label: string;
+}
+
+const Checkbox = ({ label }: CheckboxProps) => {
+  const [checked, setChecked] = React.useState<boolean>(false);
+
+>>>>>>> origin/main
   const styles = StyleSheet.create({
     container: {
       flexDirection: "row",
@@ -31,7 +43,11 @@ const Checkbox = ({ label, onChange, checked }: CheckboxProps) => {
   });
 
   return (
+<<<<<<< HEAD
     <TouchableOpacity onPress={() => onChange()} activeOpacity={1}>
+=======
+    <TouchableOpacity onPress={() => setChecked((c) => !c)} activeOpacity={1}>
+>>>>>>> origin/main
       <View style={styles.container}>
         <View style={styles.checkbox}>
           <Icon name="check" color={theme.colors.white} />
