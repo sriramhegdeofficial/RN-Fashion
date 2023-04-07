@@ -1,5 +1,9 @@
 import * as React from "react";
+<<<<<<< HEAD
 import { useTheme } from "./../../components";
+=======
+import { useTheme } from "@shopify/restyle";
+>>>>>>> origin/main
 import Animated, {
   divide,
   Extrapolate,

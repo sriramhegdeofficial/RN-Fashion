@@ -5,7 +5,10 @@ import {
   createRestyleComponent,
   VariantProps,
   createBox,
+<<<<<<< HEAD
   useTheme as useReTheme
+=======
+>>>>>>> origin/main
 } from "@shopify/restyle";
 import { color } from "react-native-reanimated";
 
@@ -116,6 +119,10 @@ export const RestyleBox = createRestyleComponent<
 >([createVariant({ themeKey: "boxVariants" })], Box);
 
 export type Theme = typeof theme;
+<<<<<<< HEAD
 export const useTheme = () => useReTheme<Theme>();
 export default theme;
 
+=======
+export default theme;
+>>>>>>> origin/main
