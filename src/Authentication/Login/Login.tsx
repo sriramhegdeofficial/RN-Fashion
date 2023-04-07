@@ -1,3 +1,6 @@
+// part 2
+
+
 import React from "react";
 import { View, KeyboardAvoidingView, Dimensions } from "react-native";
 import { Routes, StackNavigationProps } from "../../components/Navigation";
